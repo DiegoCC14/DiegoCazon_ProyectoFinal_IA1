@@ -68,8 +68,6 @@ class Algoritmo_Cumulo_de_Particulas():
 
 			mejor_individuo = self.define_mejor_individuo_poblacion() #Definimos el mejor individuo de la poblacion 
 
-		
-
 	def ordenamos_poblacion_por_mejor_desempenio( self ):
 		self.poblacion.sort( key=lambda individuo: individuo.area_sin_uso )		
 		return self.poblacion
@@ -132,19 +130,30 @@ class Algoritmo_Cumulo_de_Particulas():
 	def multiplicacion_a_vector( self , multiplicador , vector ):
 		return [ (multiplicador*casilla) for casilla in vector ]
 
-
+import Geneticos as Geneticos_Module , Cajas as Cajas_Module
 # ------------------->>>
 # -- Configuracion -->>>
-Contenedor = (10,9) #20
 
-ListaCajas = [ (1,1) , (1,1) , (1,1) , (1,1) , (1,1) , (1,1) , (1,1) , (1,1) , (1,1) , (1,1) ]
-ListaCajas += [ (2,2) , (2,2) , (2,2) , (2,2) , (2,2) ]*4 #-> 20*4 = 80 area
+admin_caja = Cajas_Module.Administrador_Cajas()
 
-Cant_Individuos = 200
+Contenedor = admin_caja.retorna_tam_contenedor( 'cajas_102_aleatorio.json' ) 
+ListaCajas = admin_caja.retorna_lista_unica_cajas_txt( 'cajas_102_aleatorio.json' )
+
+Contenedor = admin_caja.retorna_tam_contenedor( 'cajas_199_aleatorio.json' ) 
+ListaCajas = admin_caja.retorna_lista_unica_cajas_txt( 'cajas_199_aleatorio.json' )
+
+Contenedor = admin_caja.retorna_tam_contenedor( 'cajas_22_aleatorio.json' ) 
+ListaCajas = admin_caja.retorna_lista_unica_cajas_txt( 'cajas_22_aleatorio.json' )
+
+Cant_Individuos = 400
 Altura_Arboles = 3 #La altura es igual a la cantidad de vertices entre la raiz y un nodo hoja
-Cant_Ciclos = 40 #Cuantas generaciones se generaran antes de parar.
+Cant_Ciclos = 50 #Cuantas generaciones se generaran antes de parar.
 # ------------------->>>
 # ------------------->>>
+
+GA = Geneticos_Module.GA_Arbol_Guillotina( Contenedor , Cant_Individuos , Altura_Arboles , ListaCajas)
+GA.algoritmo_genetico( Cant_Ciclos )
+print( GA.poblacion[0].area_sin_uso )
 
 PSO_ = Algoritmo_Cumulo_de_Particulas( Contenedor , Cant_Individuos , Altura_Arboles , ListaCajas )
 PSO_.algoritmo_pso( Cant_Ciclos )

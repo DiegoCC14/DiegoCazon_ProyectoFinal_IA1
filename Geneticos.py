@@ -59,11 +59,10 @@ class GA_Arbol_Guillotina():
 	def definimos_poblacion_inicial( self ):
 
 		for individuo in range( self.cant_individuos ):
-
-			Arbol = Arbol_Guillotina.Arbol_de_CorteGuillotina( Altura_Arboles , Contenedor , ListaCajas ) #Definimos el objeto hoja
+			Arbol = Arbol_Guillotina.Arbol_de_CorteGuillotina( self.altura_arboles , self.contenedor , self.cajas_a_ordenar ) #Definimos el objeto hoja
 
 			corte = Arbol.corte_aleatorio_vertical_o_horizontal() #Retorna el tipo corte (vertical=V , horizontal=H)
-			Arbol.raiz = Arbol_Guillotina.Node_CorteGuillotina( Contenedor , corte , random.random() , None ) #Generamos un Nodo para la raiz
+			Arbol.raiz = Arbol_Guillotina.Node_CorteGuillotina( self.contenedor , corte , random.random() , None ) #Generamos un Nodo para la raiz
 
 			Arbol.Arma_arbolGuillotina_aleatoriamente( Arbol.raiz , Arbol.altura ) #Armamos el arbol guillotina con valores aleatorios
 
@@ -136,12 +135,11 @@ class GA_Arbol_Guillotina():
 		return self.poblacion[ len(self.poblacion)-1 ]		
 
 
-admin_caja = Cajas_py.Administrador_Cajas()
-
+'''
 # ------------------->>>
 # -- Configuracion -->>>
-Contenedor = admin_caja.retorna_tam_contenedor( 'cajas_22_aleatorio.json' ) 
-ListaCajas = admin_caja.retorna_lista_unica_cajas_txt( 'cajas_22_aleatorio.json' )
+
+admin_caja = Cajas_py.Administrador_Cajas()
 
 Contenedor = admin_caja.retorna_tam_contenedor( 'cajas_102_aleatorio.json' ) 
 ListaCajas = admin_caja.retorna_lista_unica_cajas_txt( 'cajas_102_aleatorio.json' )
@@ -149,32 +147,19 @@ ListaCajas = admin_caja.retorna_lista_unica_cajas_txt( 'cajas_102_aleatorio.json
 Contenedor = admin_caja.retorna_tam_contenedor( 'cajas_199_aleatorio.json' ) 
 ListaCajas = admin_caja.retorna_lista_unica_cajas_txt( 'cajas_199_aleatorio.json' )
 
+Contenedor = admin_caja.retorna_tam_contenedor( 'cajas_22_aleatorio.json' ) 
+ListaCajas = admin_caja.retorna_lista_unica_cajas_txt( 'cajas_22_aleatorio.json' )
+
 Cant_Individuos = 400
 Altura_Arboles = 3 #La altura es igual a la cantidad de vertices entre la raiz y un nodo hoja
-Cant_Ciclos = 30 #Cuantas generaciones se generaran antes de parar.
+Cant_Ciclos = 50 #Cuantas generaciones se generaran antes de parar.
 # ------------------->>>
 # ------------------->>>
 
-esp_minimo = Contenedor[0] * Contenedor[1]
-for x in range(5):
-	GA = GA_Arbol_Guillotina( Contenedor , Cant_Individuos , Altura_Arboles , ListaCajas)
-	GA.algoritmo_genetico( Cant_Ciclos )
-
-	print( "~~~~>>>",GA.poblacion[0].area_sin_uso)
-
-#GA.poblacion[0].VerArbol_CorteGuillotina()
-#listaArbol = GA.poblacion[0].representacion_en_forma_de_lista( GA.poblacion[0].raiz , [] , 0 )
-#print( listaArbol[0:len( listaArbol )-1] )
+GA = GA_Arbol_Guillotina( Contenedor , Cant_Individuos , Altura_Arboles , ListaCajas)
+GA.algoritmo_genetico( Cant_Ciclos )
+print( GA.poblacion[0].area_sin_uso )
 '''
-for celula in lista_celulas:
-	print(celula.VerArbol_CorteGuillotina())
-'''
-
-#Lista = ArbolGuillotina.representacion_en_forma_de_lista( ArbolGuillotina.raiz , [] , 0 )
-
-#ArbolGuillotina.VerArbol_CorteGuillotina()
-
-
 
 
 

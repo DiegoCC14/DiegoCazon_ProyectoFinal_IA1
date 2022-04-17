@@ -7,7 +7,7 @@ class Administrador_Cajas():
 		#Las iteraciones definen la cantidad de niveles de las cajas
 			#Las por cada nivel definimos un numero entero aleatorio que sera la altura para todas las cajas
 		
-		lista_altura_nivel = [ random.randint(1,100) * 2 for iteracion in range(cant_niveles) ] #Es multiplo de 2
+		lista_altura_nivel = [ random.randint(1, int(ancho_caja/2) ) * 2 for iteracion in range(cant_niveles) ] #Es multiplo de 2
 		dicc_cajas =  { 'contenedor': (0,0) , "cant_cajas": 0 , 'niveles_cajas': [] }
 		altura_contenedor = 0
 		divicion = 2
@@ -20,11 +20,11 @@ class Administrador_Cajas():
 				divicion = 2
 			
 			ancho = int( ancho_caja/divicion )
-			list_nivel_caja = [ (altura,ancho) ] * divicion
+			list_nivel_caja = [ (ancho,altura) ] * divicion
 			
 			ancho_caja_faltante = ancho_caja - (ancho*divicion)
 			if ancho_caja_faltante != 0:
-				list_nivel_caja.append( (altura,ancho_caja_faltante) )
+				list_nivel_caja.append( (ancho_caja_faltante,altura) )
 			
 			dicc_cajas['niveles_cajas'].append( list_nivel_caja )
 			dicc_cajas["cant_cajas"] += len( list_nivel_caja )
@@ -57,11 +57,11 @@ class Administrador_Cajas():
 			json.dump( dicc_datos , file , indent=4)
 
 
-
+'''
 #Configuracion --->>>
 #----------------->>>
-ancho = 200
-niveles = 33
+ancho = 44
+niveles = 4
 #----------------->>>
 #----------------->>>
 
@@ -72,5 +72,6 @@ dicc_contenedor = obj_admin.genera_cajas( ancho , niveles )
 print( dicc_contenedor['contenedor'] )
 print( dicc_contenedor['cant_cajas'] )
 
-obj_admin.guardar_datos_caja_txt( dicc_contenedor , 'cajas_199_aleatorio.json' )
+obj_admin.guardar_datos_caja_txt( dicc_contenedor , 'cajas_22_aleatorio.json' )
 #print( obj_admin.retorna_lista_unica_cajas_txt( 'salida.txt' ) )
+'''
