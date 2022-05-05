@@ -98,6 +98,6 @@ niveles = 15
 #----------------->>>
 
 obj_admin = Administrador_Cajas()
-for x in range(30):
-	dicc_contenedor = obj_admin.genera_cajas_aleatoriamente( (250,250) )
-	obj_admin.guardar_datos_caja_txt( dicc_contenedor , f'contendor_250_250_aleatorio_{x}.json' )
+for x in range(100):
+	dicc_contenedor = obj_admin.genera_cajas_aleatoriamente( (25,25) )
+	obj_admin.guardar_datos_caja_txt( dicc_contenedor , f'contendor_25_25_aleatorio_{x}.json' )

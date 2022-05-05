@@ -12,16 +12,12 @@ class GA_Arbol_Guillotina():
 
 	def algoritmo_genetico( self , cant_iteraciones ):
 		
+		mejor_desempenio_por_ciclo = [] 
+
 		self.definimos_poblacion_inicial()	#DEFINIMOS UNA POBLACION ALEATORIAMENTE	
 		
 		for ciclo in range( cant_iteraciones ):
-			'''
-			print( "1er Desempenio: " , self.poblacion[0].area_sin_uso )
-			print( "1do Desempenio: " , self.poblacion[1].area_sin_uso )
-			print( "3ro Desempenio: " , self.poblacion[2].area_sin_uso )
-			print( "4to Desempenio: " , self.poblacion[3].area_sin_uso )
-			print("~~~~~~~~~~~~>>>>>>>>>>>>>>")
-			'''
+
 			lista_individuos = self.poblacion.copy()
 			#generamos una pareja
 
@@ -57,6 +53,9 @@ class GA_Arbol_Guillotina():
 				self.ordenamos_poblacion_por_mejor_desempenio()
 				self.poblacion.pop( len( self.poblacion )-1 ) #Quitamos de la poblacion el peor desempenios
 
+			mejor_desempenio_por_ciclo.append( self.poblacion[0].area_sin_uso ) #El Mejor desempenio
+
+		return mejor_desempenio_por_ciclo #Retornamos el mejor desempenio
  
 	def definimos_poblacion_inicial( self ):
 
